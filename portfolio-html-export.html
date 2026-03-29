@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sujal Khera - Industrial &amp; Product Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* =========== RESET & TOKENS =========== */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg: #F0EDE6; --bg-dark: #0D0D0B; --text: #0D0D0B; --text-dim: #6B6860;
+    --accent: #C8281E; --rule: #CCCAC3; --rule-lt: #E0DDD8;
+    --ff-d: 'Oswald', sans-serif; --ff-b: 'IBM Plex Sans', sans-serif; --ff-m: 'IBM Plex Mono', monospace;
+    --nav: 200px; --pad: 52px;
+  }
+  @media (max-width:860px) { :root { --nav:0px; --pad:24px; } }
+  html { font-size:16px; scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:var(--ff-b); }
+  h1 { font-family:var(--ff-d); font-weight:700; line-height:0.88; }
+  h2 { font-family:var(--ff-d); font-weight:700; line-height:0.95; }
+  h3 { font-family:var(--ff-d); font-weight:500; line-height:1.2; }
+  a { color:inherit; }
+  img { display:block; max-width:100%; }
+
+  /* =========== ANIMATIONS =========== */
+  @keyframes pulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.3;transform:scaleY(.4)} }
+  .reveal { opacity:0; transform:translateY(20px); transition:opacity .65s ease, transform .65s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* =========== LAYOUT =========== */
+  .page { display:flex; min-height:100vh; }
+  .main { margin-left:var(--nav); flex:1; min-width:0; }
+  @media (max-width:860px) { .main { margin-top:56px; } }
+
+  /* =========== SIDEBAR (Desktop) =========== */
+  .sidebar-desktop {
+    position:fixed; top:0; left:0; width:var(--nav); height:100vh;
+    display:flex; flex-direction:column; padding:44px 32px;
+    border-right:1px solid var(--rule); background:var(--bg); z-index:100;
+  }
+  .sidebar-desktop .logo { font-family:var(--ff-d); font-weight:600; font-size:14px; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; line-height:1.2; color:var(--text); }
+  .sidebar-desktop .sub { font-family:var(--ff-m); font-size:10px; color:var(--text-dim); letter-spacing:.07em; text-transform:uppercase; margin:6px 0 56px; }
+  .sidebar-desktop .nav-links { list-style:none; flex:1; display:flex; flex-direction:column; gap:2px; }
+  .sidebar-desktop .nav-link { display:flex; align-items:center; gap:12px; padding:7px 0; text-decoration:none; font-family:var(--ff-m); font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--text-dim); transition:color .2s; }
+  .sidebar-desktop .nav-link.active { color:var(--text); }
+  .sidebar-desktop .nav-link .tick { height:1px; transition:width .3s, background .3s; }
+  .sidebar-desktop .nav-link .tick { width:16px; background:var(--rule); }
+  .sidebar-desktop .nav-link.active .tick { width:28px; background:var(--accent); }
+  .sidebar-desktop .contact-links { display:flex; flex-direction:column; gap:4px; }
+  .sidebar-desktop .contact-links a { text-decoration:none; font-family:var(--ff-m); font-size:10px; color:var(--text-dim); letter-spacing:.07em; transition:color .2s; }
+  .sidebar-desktop .contact-links a:hover { color:var(--accent); }
+  @media (max-width:860px) { .sidebar-desktop { display:none; } }
+
+  /* =========== MOBILE NAV =========== */
+  .mobile-nav {
+    display:none; position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:14px 24px; border-bottom:1px solid var(--rule); background:var(--bg);
+    align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  .mobile-nav .logo { font-family:var(--ff-d); font-weight:600; font-size:14px; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; color:var(--text); }
+  .mobile-nav .sub { font-family:var(--ff-m); font-size:10px; color:var(--text-dim); letter-spacing:.07em; text-transform:uppercase; }
+  .mobile-nav .links { display:flex; gap:0; margin-left:auto; }
+  .mobile-nav .links a { text-decoration:none; font-family:var(--ff-m); font-size:10px; letter-spacing:.11em; text-transform:uppercase; color:var(--text-dim); padding:4px 6px; }
+  .mobile-nav .links a.active { color:var(--text); }
+  @media (max-width:860px) { .mobile-nav { display:flex; } }
+
+  /* =========== SECTION HEADER =========== */
+  .sec-header { display:flex; align-items:baseline; justify-content:space-between; padding:44px var(--pad) 36px; border-bottom:1px solid var(--rule-lt); }
+  .sec-header .num { font-family:var(--ff-m); font-size:11px; color:var(--accent); letter-spacing:.1em; }
+  .sec-header .title { font-family:var(--ff-d); font-weight:500; font-size:12px; letter-spacing:.22em; text-transform:uppercase; }
+  .sec-header .meta { font-family:var(--ff-m); font-size:11px; color:var(--text-dim); letter-spacing:.07em; }
+
+  /* =========== HERO =========== */
+  #hero { position:relative; display:flex; flex-direction:column; justify-content:flex-end; min-height:100vh; padding:0 var(--pad) 64px; border-bottom:1px solid var(--rule); }
+  .hero-badge { display:flex; align-items:center; gap:16px; margin-bottom:36px; font-family:var(--ff-m); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); }
+  .hero-badge .line { display:block; width:36px; height:1px; background:var(--accent); }
+  .hero-name { font-size:clamp(80px,11vw,168px); letter-spacing:-.02em; text-transform:uppercase; margin-bottom:48px; opacity:0; transform:translateY(20px); transition:opacity .65s ease .2s, transform .65s ease .2s; }
+  .hero-name.loaded { opacity:1; transform:translateY(0); }
+  .hero-name .accent { color:var(--accent); }
+  .hero-row { display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between; gap:24px; opacity:0; transform:translateY(20px); transition:opacity .65s ease .35s, transform .65s ease .35s; }
+  .hero-row.loaded { opacity:1; transform:translateY(0); }
+  .hero-desc { max-width:440px; font-size:15px; font-weight:300; line-height:1.75; color:var(--text-dim); }
+  .hero-info { font-family:var(--ff-m); font-size:11px; color:var(--text-dim); letter-spacing:.07em; line-height:2.1; flex-shrink:0; }
+  .scroll-ind { display:none; position:absolute; bottom:64px; right:var(--pad); align-items:center; gap:14px; font-family:var(--ff-m); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); writing-mode:vertical-rl; }
+  .scroll-ind .bar { display:block; width:1px; height:56px; background:var(--rule); animation:pulse 2.2s ease-in-out infinite; }
+  @media (min-width:861px) { .hero-row { flex-direction:row; align-items:flex-end; gap:48px; } .hero-info { text-align:right; } .scroll-ind { display:flex; } }
+
+  /* =========== WORK SECTION =========== */
+  .project-card { text-decoration:none; display:block; color:inherit; border-bottom:1px solid var(--rule-lt); }
+  .project-card .card-grid { display:grid; grid-template-columns:1fr; min-height:340px; }
+  .project-card .card-img { position:relative; overflow:hidden; min-height:260px; }
+  .project-card .card-img img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; transition:transform .65s cubic-bezier(.76,0,.24,1); }
+  .project-card:hover .card-img img { transform:scale(1.04); }
+  .project-card .card-img .overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.4) 0%, transparent 60%); }
+  .project-card .card-info { display:flex; flex-direction:column; justify-content:space-between; padding:36px var(--pad); }
+  .project-card .card-num { font-family:var(--ff-m); font-size:11px; letter-spacing:.1em; display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .project-card .card-num .a { color:var(--accent); }
+  .project-card .card-num .d { color:var(--text-dim); }
+  .project-card .card-name { font-size:clamp(28px,3.5vw,44px); letter-spacing:.02em; text-transform:uppercase; margin:0; transition:color .3s; }
+  .project-card:hover .card-name { color:var(--accent); }
+  .project-card .card-type { margin-top:8px; margin-bottom:20px; font-family:var(--ff-m); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--text-dim); }
+  .project-card .card-desc { font-size:14px; font-weight:300; line-height:1.82; color:var(--text-dim); max-width:400px; margin:0; }
+  .project-card .card-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:28px; flex-wrap:wrap; gap:16px; }
+  .project-card .tags { display:flex; gap:8px; flex-wrap:wrap; }
+  .project-card .tag { font-family:var(--ff-m); font-size:10px; letter-spacing:.09em; text-transform:uppercase; padding:5px 11px; border:1px solid var(--rule); color:var(--text-dim); }
+  .project-card .cta { font-family:var(--ff-m); font-size:10px; letter-spacing:.14em; text-transform:uppercase; display:flex; align-items:center; gap:10px; transition:color .2s, gap .3s; flex-shrink:0; }
+  .project-card:hover .cta { color:var(--accent); gap:16px; }
+  @media (min-width:861px) { .project-card .card-grid { grid-template-columns:1fr 1fr; } .project-card .card-img { border-right:1px solid var(--rule-lt); } }
+
+  /* =========== ABOUT =========== */
+  .about-grid { display:grid; grid-template-columns:1fr; }
+  .about-text { padding:64px var(--pad); }
+  .about-text h2 { font-size:clamp(40px,4.5vw,68px); letter-spacing:.02em; text-transform:uppercase; margin-bottom:36px; }
+  .about-text p { font-size:15px; font-weight:300; line-height:1.8; color:var(--text-dim); max-width:400px; margin-bottom:18px; }
+  .about-text p .hl { color:var(--text); font-weight:400; }
+  .about-skills { padding:64px var(--pad); border-top:1px solid var(--rule-lt); }
+  .about-skills .label { font-family:var(--ff-m); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); margin-bottom:32px; }
+  .skills-grid { display:grid; grid-template-columns:1fr; }
+  .skill-item { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--rule-lt); font-size:13px; }
+  .skill-item .name { font-family:var(--ff-b); font-weight:400; }
+  .skill-item .level { font-family:var(--ff-m); font-size:10px; letter-spacing:.08em; color:var(--text-dim); }
+  @media (min-width:861px) {
+    .about-grid { grid-template-columns:1fr 1fr; }
+    .about-text { border-right:1px solid var(--rule-lt); }
+    .about-skills { border-top:none; }
+    .skills-grid { grid-template-columns:1fr 1fr; }
+    .skill-item.even { padding-left:28px; border-left:1px solid var(--rule-lt); }
+    .skill-item.odd { padding-right:28px; }
+  }
+
+  /* =========== PRINCIPLES =========== */
+  .principles-grid { display:grid; grid-template-columns:1fr; }
+  .principle { padding:60px var(--pad); border-bottom:1px solid var(--rule-lt); }
+  .principle .big-num { font-family:var(--ff-m); font-size:56px; font-weight:300; color:var(--rule-lt); line-height:1; margin-bottom:24px; }
+  .principle h3 { font-size:18px; letter-spacing:.07em; text-transform:uppercase; margin-bottom:16px; }
+  .principle p { font-size:13px; font-weight:300; line-height:1.82; color:var(--text-dim); }
+  @media (min-width:861px) {
+    .principles-grid { grid-template-columns:1fr 1fr 1fr; }
+    .principle { border-bottom:none; }
+    .principle:not(:last-child) { border-right:1px solid var(--rule-lt); }
+  }
+
+  /* =========== CONTACT =========== */
+  .contact-grid { display:grid; grid-template-columns:1fr; gap:80px; padding:80px var(--pad); }
+  .contact-grid h2 { font-family:var(--ff-d); font-weight:700; font-size:clamp(56px,8vw,108px); line-height:.9; letter-spacing:.02em; text-transform:uppercase; }
+  .contact-grid h2 em { font-style:italic; font-weight:300; color:var(--text-dim); }
+  .contact-link { display:flex; align-items:center; justify-content:space-between; text-decoration:none; padding:22px 0; border-bottom:1px solid var(--rule-lt); transition:padding-left .3s, color .3s; }
+  .contact-link:hover { padding-left:14px; color:var(--accent); }
+  .contact-link .cl-label { font-family:var(--ff-m); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; }
+  .contact-link .cl-value { font-family:var(--ff-d); font-size:22px; font-weight:400; letter-spacing:.04em; text-transform:uppercase; }
+  .contact-link .arrow { font-size:20px; }
+  @media (min-width:861px) { .contact-grid { grid-template-columns:1fr 1fr; align-items:center; } }
+
+  /* =========== FOOTER =========== */
+  .site-footer { display:flex; align-items:center; justify-content:space-between; padding:28px var(--pad); font-family:var(--ff-m); font-size:11px; color:var(--text-dim); letter-spacing:.07em; }
+  .site-footer .accent { color:var(--accent); }
+
+  /* =========== PROJECT PAGE =========== */
+  .project-page { display:none; min-height:100vh; }
+  .project-page.active { display:block; }
+  .home-view.hidden { display:none; }
+
+  /* Project sidebar */
+  .proj-sidebar { position:fixed; top:0; left:0; width:var(--nav); height:100vh; display:flex; flex-direction:column; padding:44px 32px; z-index:100; }
+  .proj-sidebar .back-btn { display:flex; align-items:center; gap:12px; padding:7px 0; border:none; background:none; cursor:pointer; font-family:var(--ff-m); font-size:11px; letter-spacing:.11em; text-transform:uppercase; text-align:left; }
+  .proj-sidebar .cur-label { font-family:var(--ff-m); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-top:32px; margin-bottom:8px; }
+  .proj-sidebar .cur-name { font-family:var(--ff-d); font-weight:500; font-size:16px; letter-spacing:.06em; text-transform:uppercase; }
+  .proj-sidebar .next-link { text-decoration:none; font-family:var(--ff-m); font-size:10px; letter-spacing:.07em; text-transform:uppercase; }
+  @media (max-width:860px) { .proj-sidebar { display:none; } }
+
+  /* Project mobile bar */
+  .proj-mobile-bar { display:none; position:fixed; top:0; left:0; right:0; z-index:100; padding:14px 24px; align-items:center; justify-content:space-between; }
+  .proj-mobile-bar a { text-decoration:none; font-family:var(--ff-m); font-size:10px; letter-spacing:.11em; text-transform:uppercase; }
+  .proj-mobile-bar .proj-title { font-family:var(--ff-d); font-weight:600; font-size:14px; letter-spacing:.14em; text-transform:uppercase; }
+  @media (max-width:860px) { .proj-mobile-bar { display:flex; } }
+
+  /* Project hero */
+  .proj-hero { position:relative; display:flex; flex-direction:column; justify-content:flex-end; min-height:100vh; overflow:hidden; }
+  .proj-hero .bg-img { position:absolute; inset:0; z-index:0; }
+  .proj-hero .bg-img img { width:100%; height:100%; object-fit:cover; opacity:.2; }
+  .proj-hero .bg-grad { position:absolute; inset:0; }
+  .proj-hero .hero-content { position:relative; z-index:1; padding:0 var(--pad) 64px; }
+  .proj-hero .proj-badge { display:flex; align-items:center; gap:16px; margin-bottom:36px; font-family:var(--ff-m); font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+  .proj-hero .proj-badge .line { display:block; width:36px; height:1px; }
+  .proj-hero .proj-title-big { font-size:clamp(64px,10vw,148px); letter-spacing:-.02em; text-transform:uppercase; margin-bottom:24px; }
+  .proj-hero .proj-subtitle { font-family:var(--ff-m); font-size:11px; letter-spacing:.09em; text-transform:uppercase; margin-bottom:24px; }
+  .proj-hero .proj-tags { display:flex; gap:8px; flex-wrap:wrap; }
+  .proj-hero .proj-tag { font-family:var(--ff-m); font-size:10px; letter-spacing:.09em; text-transform:uppercase; padding:5px 11px; }
+
+  /* Project overview */
+  .proj-overview-grid { display:grid; grid-template-columns:1fr; }
+  .proj-overview-text { padding:64px var(--pad); }
+  .proj-overview-text p { font-size:18px; font-weight:300; line-height:1.8; max-width:460px; }
+  .proj-details { padding:64px var(--pad); }
+  .proj-details .details-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px 0; }
+  .proj-details .detail-label { font-family:var(--ff-m); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px; }
+  .proj-details .detail-value { font-family:var(--ff-b); font-size:14px; }
+  @media (min-width:861px) {
+    .proj-overview-grid { grid-template-columns:1fr 1fr; }
+    .proj-overview-text { border-right-width:1px; border-right-style:solid; }
+  }
+
+  /* Process section */
+  .process-grid { display:grid; grid-template-columns:1fr; }
+  .process-block { padding:60px var(--pad); }
+  .process-block .big-num { font-family:var(--ff-m); font-size:56px; font-weight:300; line-height:1; margin-bottom:24px; }
+  .process-block h3 { font-size:18px; letter-spacing:.07em; text-transform:uppercase; margin-bottom:16px; }
+  .process-block p { font-size:13px; font-weight:300; line-height:1.82; }
+  @media (min-width:861px) { .process-grid { grid-template-columns:1fr 1fr 1fr; } }
+
+  /* Gallery */
+  .gallery-item { display:grid; grid-template-columns:1fr; }
+  .gallery-item .gal-img { position:relative; overflow:hidden; }
+  .gallery-item .gal-img img { width:100%; height:100%; object-fit:cover; }
+  .gallery-item .gal-caption { display:flex; align-items:center; padding:32px var(--pad); }
+  .gallery-item .gal-num { font-family:var(--ff-m); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+  .gallery-item .gal-text { font-family:var(--ff-b); font-size:14px; line-height:1.7; max-width:360px; }
+  @media (min-width:861px) { .gallery-item { grid-template-columns:1fr 1fr; } .gallery-item .gal-img { border-right-width:1px; border-right-style:solid; } }
+
+  /* Project nav footer */
+  .proj-nav-footer { display:grid; grid-template-columns:1fr; }
+  .proj-nav-link { text-decoration:none; display:flex; flex-direction:column; justify-content:center; padding:60px var(--pad); color:inherit; }
+  .proj-nav-link .pnl-label { font-family:var(--ff-m); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+  .proj-nav-link .pnl-name { font-family:var(--ff-d); font-weight:500; font-size:clamp(28px,4vw,48px); letter-spacing:.03em; text-transform:uppercase; }
+  @media (min-width:861px) { .proj-nav-footer { grid-template-columns:1fr 1fr; } }
+
+  .proj-full-img { position:relative; overflow:hidden; height:60vh; }
+  .proj-full-img img { width:100%; height:100%; object-fit:cover; opacity:.7; }
+  .proj-full-img .center-label { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--ff-m); font-size:10px; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<!-- ===================== HOME VIEW ===================== -->
+<div class="home-view" id="homeView">
+<div class="page">
+
+  <!-- DESKTOP SIDEBAR -->
+  <nav class="sidebar-desktop">
+    <a href="#hero" class="logo">Sujal<br>Khera</a>
+    <div class="sub">B.Des &middot; Industrial Design</div>
+    <ul class="nav-links">
+      <li><a href="#work" class="nav-link" data-section="work"><span class="tick"></span>Work</a></li>
+      <li><a href="#about" class="nav-link" data-section="about"><span class="tick"></span>About</a></li>
+      <li><a href="#principles" class="nav-link" data-section="principles"><span class="tick"></span>Process</a></li>
+      <li><a href="#contact" class="nav-link" data-section="contact"><span class="tick"></span>Contact</a></li>
+    </ul>
+    <div class="contact-links">
+      <a href="mailto:sujalkhera2005@gmail.com">sujalkhera2005@gmail.com</a>
+      <a href="https://linkedin.com/in/sujalkhera-896a9a17a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="tel:+918860752147">+91 88607 52147</a>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav">
+    <a href="#hero" class="logo">Sujal Khera</a>
+    <span class="sub">B.Des &middot; Industrial Design</span>
+    <div class="links">
+      <a href="#work" data-section="work">Work</a>
+      <a href="#about" data-section="about">About</a>
+      <a href="#principles" data-section="principles">Process</a>
+      <a href="#contact" data-section="contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-badge"><span class="line"></span>Portfolio &middot; 2025</div>
+      <h1 class="hero-name" id="heroName">Sujal<br><span class="accent">Khera</span></h1>
+      <div class="hero-row" id="heroRow">
+        <div>
+          <p class="hero-desc">Industrial &amp; Product Designer at CEPT University, Ahmedabad.<br>I design physical systems that change how people behave &mdash;<br>not just how things look.</p>
+        </div>
+        <div class="hero-info">CEPT University &middot; B.Des Industrial Design<br>Polygons Design &middot; Product Designer<br>Ahmedabad &middot; 2023 &mdash; 2028</div>
+      </div>
+      <div class="scroll-ind">Scroll<span class="bar"></span></div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" style="border-bottom:1px solid var(--rule)">
+      <div class="sec-header"><span class="num">01</span><span class="title">Selected Work</span><span class="meta">3 Projects</span></div>
+
+      <!-- GyroPad X -->
+      <a href="#" class="project-card reveal" onclick="showProject('gyropad-x');return false;">
+        <div class="card-grid">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1632160972482-2b19b52a6a4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080" alt="GyroPad X">
+            <div class="overlay"></div>
+          </div>
+          <div class="card-info">
+            <div>
+              <div class="card-num"><span class="a">PROJECT 001</span><span class="d">&middot; 2025</span></div>
+              <h3 class="card-name">GyroPad X</h3>
+              <div class="card-type">Mechanism Design / Accessibility</div>
+              <p class="card-desc">A mechanical, plug-and-play gamepad attachment enabling one-handed play across mainstream console titles. Designed through direct collaboration with gamers with upper limb disabilities...</p>
+            </div>
+            <div class="card-bottom">
+              <div class="tags"><span class="tag">Mechanism Design</span><span class="tag">Accessibility</span><span class="tag">DFM</span></div>
+              <span class="cta">View Project &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- XChange -->
+      <a href="#" class="project-card reveal" onclick="showProject('xchange');return false;">
+        <div class="card-grid">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1696041757950-62e2c030283b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080" alt="XChange">
+            <div class="overlay"></div>
+          </div>
+          <div class="card-info">
+            <div>
+              <div class="card-num"><span class="a">PROJECT 002</span><span class="d">&middot; 2025</span></div>
+              <h3 class="card-name">XChange</h3>
+              <div class="card-type">Behavioral System / Simple Product</div>
+              <p class="card-desc">A physical product and behavioral system designed to facilitate meaningful exchange between communities. XChange reframes the act of swapping as a tool for building social trust...</p>
+            </div>
+            <div class="card-bottom">
+              <div class="tags"><span class="tag">Behavioral Design</span><span class="tag">Systems Thinking</span><span class="tag">User Research</span></div>
+              <span class="cta">View Project &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Torchure -->
+      <a href="#" class="project-card reveal" onclick="showProject('torchure');return false;">
+        <div class="card-grid">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1574624181793-06124e5c258d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080" alt="Torchure">
+            <div class="overlay"></div>
+          </div>
+          <div class="card-info">
+            <div>
+              <div class="card-num"><span class="a">PROJECT 003</span><span class="d">&middot; 2024</span></div>
+              <h3 class="card-name">Torchure</h3>
+              <div class="card-type">Sustainable Wearable / Material Redesign</div>
+              <p class="card-desc">A wearable torch reimagined through sustainable materials and manufacturing processes. Torchure challenges the disposable flashlight paradigm by creating a body-worn light source...</p>
+            </div>
+            <div class="card-bottom">
+              <div class="tags"><span class="tag">Sustainability</span><span class="tag">Material Design</span><span class="tag">Wearables</span></div>
+              <span class="cta">View Project &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" style="border-bottom:1px solid var(--rule)">
+      <div class="sec-header"><span class="num">02</span><span class="title">About</span><span class="meta"></span></div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <h2>Design is<br>a behaviour<br>problem.</h2>
+          <p>Currently studying Industrial &amp; Product Design at CEPT University and working as <span class="hl">sole product designer at Polygons Design, Mumbai</span> &mdash; end-to-end from concept to manufacturing-ready CAD.</p>
+          <p>My work lives at the intersection of <span class="hl">mechanism design, user behaviour, and material honesty</span>. I believe the best products communicate function before anyone reads a label.</p>
+          <p>Previously co-founded AgensiaCo. Completed BCI Summer Program with Virginia Tech. Experienced in F1 in Schools competition design.</p>
+        </div>
+        <div class="about-skills reveal">
+          <div class="label">Tools &amp; Capabilities</div>
+          <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section id="principles" style="border-bottom:1px solid var(--rule)">
+      <div class="sec-header"><span class="num">03</span><span class="title">Design Principles</span><span class="meta"></span></div>
+      <div class="principles-grid">
+        <div class="principle reveal">
+          <div class="big-num">01</div>
+          <h3>Function Determines Form</h3>
+          <p>Every geometric decision needs a reason &mdash; function, material logic, or manufacturing constraint. If a form cannot justify itself, it is removed. Decoration is a last resort, never a starting point.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="big-num">02</div>
+          <h3>Hesitation is a Design Failure</h3>
+          <p>If a user pauses to understand how something works, the design has already failed. Affordance, visual hierarchy, and interaction cost are the real material of product design &mdash; before any physical material is chosen.</p>
+        </div>
+        <div class="principle reveal">
+          <div class="big-num">03</div>
+          <h3>Prototype to Kill Ideas Fast</h3>
+          <p>Paper before CAD. CAD before renders. Physical prototypes before presentations. The fastest path to a good idea is building the bad ones first and extracting the lesson from each failure without sentiment.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="border-bottom:1px solid var(--rule)">
+      <div class="sec-header"><span class="num">04</span><span class="title">Contact</span><span class="meta"></span></div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <h2>Let's<br><em>work</em><br>together.</h2>
+        </div>
+        <div class="reveal">
+          <a href="mailto:sujalkhera2005@gmail.com" class="contact-link">
+            <div><div class="cl-label">Email</div><div class="cl-value">sujalkhera2005@gmail.com</div></div>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <a href="https://linkedin.com/in/sujalkhera-896a9a17a" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <div><div class="cl-label">LinkedIn</div><div class="cl-value">Sujal Khera</div></div>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <a href="tel:+918860752147" class="contact-link">
+            <div><div class="cl-label">Phone</div><div class="cl-value">+91 88607 52147</div></div>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <span>&copy; 2025 Sujal Khera</span>
+      <span>Designed with <span class="accent">precision</span>. Built to last.</span>
+    </footer>
+
+  </main>
+</div>
+</div>
+
+<!-- ===================== PROJECT PAGES (generated by JS) ===================== -->
+<div id="projectContainer"></div>
+
+<script>
+// =========== DATA ===========
+const projects = [
+  {
+    slug: "gyropad-x", num: "001", name: "GyroPad X", subtitle: "Adaptive Gaming Controller Attachment",
+    type: "Mechanism Design / Accessibility", year: "2025",
+    tags: ["Mechanism Design", "Accessibility", "DFM"],
+    heroImage: "https://images.unsplash.com/photo-1632160972482-2b19b52a6a4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",
+    theme: { bg:"#0D0D0B", bgDark:"#1A1A18", text:"#F0EDE6", textDim:"#8A8780", accent:"#C8281E", rule:"#2A2A27", ruleLt:"#1F1F1D" },
+    overview: "A mechanical, plug-and-play gamepad attachment enabling one-handed play across mainstream console titles. Designed through direct collaboration with gamers with upper limb disabilities \u2014 identifying real friction, not assumed solutions.",
+    challenge: "Mainstream gaming controllers assume bilateral motor function. Existing adaptive solutions are prohibitively expensive, require proprietary ecosystems, or force users into entirely separate hardware that signals disability. The challenge was to create an attachment that works with controllers people already own \u2014 no batteries, no Bluetooth, no setup friction.",
+    approach: "Started with contextual interviews and observation sessions with gamers with varying upper limb conditions. Rapid paper prototyping tested grip angles and trigger reach. Parametric CAD in Fusion 360 allowed quick iteration on mechanism geometry. The final design uses a gyroscopic tilt mechanism that maps analog stick movement to wrist rotation, with mechanical linkages for trigger and bumper access.",
+    outcome: "Working prototype tested with 8 participants. Average setup time: 12 seconds. All participants completed test gameplay sessions that were previously impossible. Currently preparing DFM documentation for injection molding at sub-$40 target price point.",
+    details: [{label:"Duration",value:"14 weeks"},{label:"Role",value:"Solo Designer"},{label:"Tools",value:"Fusion 360, KeyShot, 3D Printing"},{label:"Status",value:"DFM in progress"}],
+    gallery: [
+      {src:"https://images.unsplash.com/photo-1744109424989-0ad24c4244e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Ergonomic grip study \u2014 testing thumb reach and palm contact zones"},
+      {src:"https://images.unsplash.com/photo-1739515054273-a2956b1e094a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Rapid prototyping \u2014 3D printed mechanism iterations"},
+      {src:"https://images.unsplash.com/photo-1576864333223-db90dadfb975?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"User testing sessions with accessibility-focused participants"},
+      {src:"https://images.unsplash.com/photo-1701448149957-b96dbd1926ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"DFM preparation \u2014 injection molding toolpath analysis"},
+      {src:"https://images.unsplash.com/photo-1743862558369-5dcea79ccbff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Component assembly \u2014 mechanical linkage and housing fit check"},
+      {src:"https://images.unsplash.com/photo-1643110496205-b28072026c62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Final render \u2014 KeyShot product visualization on dark backdrop"}
+    ]
+  },
+  {
+    slug: "xchange", num: "002", name: "XChange", subtitle: "Behavioral Exchange System",
+    type: "Behavioral System / Simple Product", year: "2025",
+    tags: ["Behavioral Design", "Systems Thinking", "User Research"],
+    heroImage: "https://images.unsplash.com/photo-1696041757950-62e2c030283b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",
+    theme: { bg:"#0B1628", bgDark:"#0E1D35", text:"#E8EDF5", textDim:"#6B7FA0", accent:"#2E86DE", rule:"#1D2D4A", ruleLt:"#152238" },
+    overview: "A physical product and behavioral system designed to facilitate meaningful exchange between communities. XChange reframes the act of swapping as a tool for building social trust and reducing material waste.",
+    challenge: "Modern consumption patterns discourage reuse and community exchange. Digital platforms for trading feel transactional and impersonal. The challenge was to create a physical touchpoint that makes exchanging feel deliberate, personal, and rewarding \u2014 not like a downgrade.",
+    approach: "Ethnographic research across three communities revealed that the friction in exchange isn't logistical \u2014 it's emotional. People attach identity to ownership. The design response focused on ritual: creating a physical object that elevates the act of giving something away. Material choices signal permanence; the interaction sequence builds anticipation.",
+    outcome: "Piloted across two university communities with 45+ active participants. Exchange frequency increased 3x compared to a digital-only baseline. Participants reported stronger community connection and reduced impulse purchasing.",
+    details: [{label:"Duration",value:"10 weeks"},{label:"Role",value:"Lead Designer"},{label:"Tools",value:"User Research, Fusion 360, Prototyping"},{label:"Status",value:"Pilot complete"}],
+    gallery: [
+      {src:"https://images.unsplash.com/photo-1723489553375-342965f1c4e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Community exchange pilot \u2014 participants during swap event"},
+      {src:"https://images.unsplash.com/photo-1667964395256-0a0fd2d833bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Physical exchange token \u2014 material and form exploration"},
+      {src:"https://images.unsplash.com/photo-1686771416317-b964cc4e0002?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Ethnographic research \u2014 community observation and interviews"},
+      {src:"https://images.unsplash.com/photo-1696041757950-62e2c030283b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Community workshop \u2014 facilitating group exchange sessions"},
+      {src:"https://images.unsplash.com/photo-1593697153695-7da77ba520aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Service blueprint \u2014 mapping the behavioral exchange journey"},
+      {src:"https://images.unsplash.com/photo-1761125802333-d145773f4461?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Packaging design \u2014 sustainable materials for exchange kits"}
+    ]
+  },
+  {
+    slug: "torchure", num: "003", name: "Torchure", subtitle: "Sustainable Wearable Torch",
+    type: "Sustainable Wearable / Material Redesign", year: "2024",
+    tags: ["Sustainability", "Material Design", "Wearables"],
+    heroImage: "https://images.unsplash.com/photo-1574624181793-06124e5c258d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",
+    theme: { bg:"#1A1408", bgDark:"#231C0F", text:"#F0E8D4", textDim:"#9A8B6A", accent:"#D4A853", rule:"#3A3020", ruleLt:"#2A2418" },
+    overview: "A wearable torch reimagined through sustainable materials and manufacturing processes. Torchure challenges the disposable flashlight paradigm by creating a body-worn light source that is repairable, modular, and made from responsibly sourced materials.",
+    challenge: "Portable lighting products are overwhelmingly single-use or designed for planned obsolescence. Battery waste and plastic housing contribute to significant environmental impact. The challenge was to redesign a simple product category from material selection through end-of-life, without sacrificing usability or desirability.",
+    approach: "Material audit of existing torch products revealed that 78% of components could be replaced with bio-based or recycled alternatives. The wearable form factor was driven by use-case research with night runners, cyclists, and outdoor workers. Modular construction allows battery and LED module replacement. Cork, recycled aluminum, and bio-resin form the primary material palette.",
+    outcome: "Final prototype achieved 90% reduction in virgin plastic use compared to market equivalents. Wearable comfort rated 4.6/5 across 20 user tests. Design awarded recognition at CEPT Annual Design Exhibition 2024.",
+    details: [{label:"Duration",value:"8 weeks"},{label:"Role",value:"Solo Designer"},{label:"Tools",value:"Fusion 360, Material Testing, KeyShot"},{label:"Status",value:"Exhibition complete"}],
+    gallery: [
+      {src:"https://images.unsplash.com/photo-1687670228511-61b4ffba6d53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Cork and bio-resin material palette \u2014 sustainable sourcing"},
+      {src:"https://images.unsplash.com/photo-1719381437995-70847eaf5d57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Use-case testing \u2014 night running wearable light evaluation"},
+      {src:"https://images.unsplash.com/photo-1705254772179-991469a47e19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Recycled aluminum housing \u2014 material testing and finish study"},
+      {src:"https://images.unsplash.com/photo-1637143866346-4686356635e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Strap and clasp mechanism \u2014 wearable attachment system design"},
+      {src:"https://images.unsplash.com/photo-1587569087747-addba755bda6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"LED module assembly \u2014 modular electronics for easy replacement"},
+      {src:"https://images.unsplash.com/photo-1523456836369-09236da4c580?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",caption:"Material samples \u2014 bio-based alternatives comparison study"}
+    ]
+  }
+];
+
+const skills = [
+  {name:"Fusion 360",level:"Advanced"},{name:"KeyShot",level:"Advanced"},
+  {name:"Parametric CAD",level:"Advanced"},{name:"Rapid Prototyping",level:"Advanced"},
+  {name:"Mechanism Design",level:"Advanced"},{name:"Technical Drawing",level:"Advanced"},
+  {name:"User Research",level:"Advanced"},{name:"Figma",level:"Intermediate"},
+  {name:"Blender",level:"Intermediate"},{name:"Adobe Suite",level:"Intermediate"},
+  {name:"DFM",level:"Learning"},{name:"Materials Science",level:"Intermediate"}
+];
+
+// =========== RENDER SKILLS ===========
+(function() {
+  const grid = document.getElementById('skillsGrid');
+  skills.forEach((s, i) => {
+    const cls = i % 2 === 0 ? 'odd' : 'even';
+    grid.innerHTML += `<div class="skill-item ${cls}"><span class="name">${s.name}</span><span class="level">${s.level}</span></div>`;
+  });
+})();
+
+// =========== GENERATE PROJECT PAGES ===========
+(function() {
+  const container = document.getElementById('projectContainer');
+  projects.forEach((p, idx) => {
+    const next = projects[(idx + 1) % projects.length];
+    const t = p.theme;
+    const galleryHTML = p.gallery.map((g, i) => {
+      const h = i === 0 ? 400 : i <= 2 ? 320 : 260;
+      return `
+        <div class="gallery-item reveal" style="border-bottom:1px solid ${t.ruleLt}">
+          <div class="gal-img" style="height:${h}px;background:${t.bgDark};border-color:${t.ruleLt}">
+            <img src="${g.src}" alt="${g.caption}">
+          </div>
+          <div class="gal-caption">
+            <div>
+              <div class="gal-num" style="color:${t.accent}">${String(i+1).padStart(2,'0')}</div>
+              <div class="gal-text" style="color:${t.textDim}">${g.caption}</div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    const detailsHTML = p.details.map(d => `
+      <div>
+        <div class="detail-label" style="color:${t.textDim}">${d.label}</div>
+        <div class="detail-value" style="color:${t.text}">${d.value}</div>
+      </div>`).join('');
+
+    const tagsHTML = p.tags.map(tag => `<span class="proj-tag" style="border:1px solid ${t.rule};color:${t.textDim}">${tag}</span>`).join('');
+
+    const nameWords = p.name.split(' ');
+    const nameHTML = nameWords.map((w,i) => i === nameWords.length - 1 ? `<span style="color:${t.accent}">${w}</span>` : w + '<br>').join('');
+
+    container.innerHTML += `
+    <div class="project-page" id="proj-${p.slug}" style="background:${t.bg};color:${t.text}">
+      <!-- Sidebar -->
+      <nav class="proj-sidebar" style="border-right:1px solid ${t.rule};background:${t.bg}">
+        <a href="#" onclick="goHome();return false;" class="logo" style="color:${t.text};text-decoration:none;font-family:var(--ff-d);font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2">Sujal<br>Khera</a>
+        <div style="font-family:var(--ff-m);font-size:10px;color:${t.textDim};letter-spacing:.07em;text-transform:uppercase;margin:6px 0 56px">B.Des &middot; Industrial Design</div>
+        <div style="flex:1">
+          <button class="proj-sidebar back-btn" onclick="goHome()" style="color:${t.accent}"><span style="display:block;width:28px;height:1px;background:${t.accent}"></span>&larr; Back</button>
+          <div class="cur-label" style="color:${t.textDim}">Current Project</div>
+          <div class="cur-name" style="color:${t.text}">${p.name}</div>
+        </div>
+        <a href="#" onclick="showProject('${next.slug}');return false;" class="next-link" style="color:${t.textDim}">Next: ${next.name} &rarr;</a>
+      </nav>
+
+      <!-- Mobile bar -->
+      <div class="proj-mobile-bar" style="border-bottom:1px solid ${t.rule};background:${t.bg}">
+        <a href="#" onclick="goHome();return false;" style="color:${t.accent}">&larr; Back</a>
+        <span class="proj-title" style="color:${t.text}">${p.name}</span>
+        <a href="#" onclick="showProject('${next.slug}');return false;" style="color:${t.textDim}">Next &rarr;</a>
+      </div>
+
+      <main class="main" style="margin-left:var(--nav)">
+        <!-- Hero -->
+        <section class="proj-hero" style="border-bottom:1px solid ${t.rule}">
+          <div class="bg-img"><img src="${p.heroImage}" alt="${p.name}"></div>
+          <div class="bg-grad" style="background:linear-gradient(to top, ${t.bg} 20%, transparent 80%)"></div>
+          <div class="hero-content">
+            <div class="proj-badge" style="color:${t.textDim}"><span class="line" style="background:${t.accent}"></span>Project ${p.num} &middot; ${p.year}</div>
+            <h1 class="proj-title-big" style="color:${t.text}">${nameHTML}</h1>
+            <div class="proj-subtitle" style="color:${t.textDim}">${p.subtitle}</div>
+            <div class="proj-tags">${tagsHTML}</div>
+          </div>
+        </section>
+
+        <!-- Overview -->
+        <section style="border-bottom:1px solid ${t.rule}">
+          <div class="sec-header" style="border-color:${t.ruleLt}">
+            <span class="num" style="color:${t.accent}">01</span>
+            <span class="title" style="color:${t.text}">Overview</span>
+            <span class="meta" style="color:${t.textDim}">${p.type}</span>
+          </div>
+          <div class="proj-overview-grid" style="border-bottom:1px solid ${t.ruleLt}">
+            <div class="proj-overview-text reveal" style="border-color:${t.ruleLt}">
+              <p style="color:${t.textDim}">${p.overview}</p>
+            </div>
+            <div class="proj-details reveal">
+              <div class="details-grid">${detailsHTML}</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Process -->
+        <section style="border-bottom:1px solid ${t.rule}">
+          <div class="sec-header" style="border-color:${t.ruleLt}">
+            <span class="num" style="color:${t.accent}">02</span>
+            <span class="title" style="color:${t.text}">Process</span>
+            <span class="meta" style="width:40px"></span>
+          </div>
+          <div class="process-grid">
+            <div class="process-block reveal" style="border-right:1px solid ${t.ruleLt}">
+              <div class="big-num" style="color:${t.ruleLt}">01</div>
+              <h3 style="color:${t.text}">Challenge</h3>
+              <p style="color:${t.textDim}">${p.challenge}</p>
+            </div>
+            <div class="process-block reveal" style="border-right:1px solid ${t.ruleLt}">
+              <div class="big-num" style="color:${t.ruleLt}">02</div>
+              <h3 style="color:${t.text}">Approach</h3>
+              <p style="color:${t.textDim}">${p.approach}</p>
+            </div>
+            <div class="process-block reveal">
+              <div class="big-num" style="color:${t.ruleLt}">03</div>
+              <h3 style="color:${t.text}">Outcome</h3>
+              <p style="color:${t.textDim}">${p.outcome}</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Full image -->
+        <section style="border-bottom:1px solid ${t.rule}">
+          <div class="proj-full-img" style="background:${t.bgDark}">
+            <img src="${p.heroImage}" alt="${p.name} detail">
+            <div class="center-label" style="background:linear-gradient(to right,${t.bg}44,transparent,${t.bg}44);color:${t.textDim}">${p.subtitle}</div>
+          </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="border-bottom:1px solid ${t.rule}">
+          <div class="sec-header" style="border-color:${t.ruleLt}">
+            <span class="num" style="color:${t.accent}">03</span>
+            <span class="title" style="color:${t.text}">Gallery</span>
+            <span class="meta" style="color:${t.textDim}">${p.gallery.length} Images</span>
+          </div>
+          ${galleryHTML}
+        </section>
+
+        <!-- Nav footer -->
+        <section>
+          <div class="proj-nav-footer">
+            <a href="#" onclick="goHome();return false;" class="proj-nav-link reveal" style="border-bottom:1px solid ${t.ruleLt};border-right:1px solid ${t.ruleLt}">
+              <div class="pnl-label" style="color:${t.textDim}">&larr; Back to</div>
+              <div class="pnl-name" style="color:${t.text}">All Work</div>
+            </a>
+            <a href="#" onclick="showProject('${next.slug}');return false;" class="proj-nav-link reveal" style="border-bottom:1px solid ${t.ruleLt}">
+              <div class="pnl-label" style="color:${t.textDim}">Next Project &rarr;</div>
+              <div class="pnl-name" style="color:${t.text}">${next.name}</div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+          <span style="color:${t.textDim}">&copy; 2025 Sujal Khera</span>
+          <span style="color:${t.textDim}">Designed with <span style="color:${t.accent}">precision</span>. Built to last.</span>
+        </footer>
+      </main>
+    </div>`;
+  });
+})();
+
+// =========== NAVIGATION ===========
+function showProject(slug) {
+  document.getElementById('homeView').classList.add('hidden');
+  document.querySelectorAll('.project-page').forEach(p => p.classList.remove('active'));
+  const proj = document.getElementById('proj-' + slug);
+  if (proj) { proj.classList.add('active'); }
+  window.scrollTo(0, 0);
+  history.pushState({slug}, '', '#/project/' + slug);
+  // Re-trigger reveals
+  setTimeout(initReveals, 100);
+}
+
+function goHome() {
+  document.querySelectorAll('.project-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('homeView').classList.remove('hidden');
+  window.scrollTo(0, 0);
+  history.pushState({}, '', '#/');
+  setTimeout(initReveals, 100);
+}
+
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.slug) { showProject(e.state.slug); }
+  else { goHome(); }
+});
+
+// =========== SCROLL REVEAL ===========
+function initReveals() {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { el.classList.add('visible'); io.unobserve(el); }
+    }, { threshold: 0.08 });
+    io.observe(el);
+  });
+}
+
+// =========== SCROLL SPY ===========
+function updateScrollSpy() {
+  const sections = ['hero','work','about','principles','contact'];
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 180) current = id;
+  });
+  // Desktop
+  document.querySelectorAll('.sidebar-desktop .nav-link').forEach(a => {
+    a.classList.toggle('active', a.dataset.section === current);
+  });
+  // Mobile
+  document.querySelectorAll('.mobile-nav .links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.section === current);
+  });
+}
+
+// =========== INIT ===========
+window.addEventListener('scroll', updateScrollSpy, { passive: true });
+window.addEventListener('DOMContentLoaded', function() {
+  // Hero load animation
+  setTimeout(() => {
+    document.getElementById('heroName').classList.add('loaded');
+    document.getElementById('heroRow').classList.add('loaded');
+  }, 200);
+
+  initReveals();
+  updateScrollSpy();
+
+  // Check hash for direct project links
+  const hash = location.hash;
+  if (hash.startsWith('#/project/')) {
+    const slug = hash.replace('#/project/', '');
+    showProject(slug);
+  }
+});
+</script>
+</body>
+</html>
